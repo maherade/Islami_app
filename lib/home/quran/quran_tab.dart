@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/home/quran/sura_title_widget.dart';
 
-class QuranTab extends StatelessWidget {
+class QuranTab extends StatefulWidget {
+  @override
+  State<QuranTab> createState() => _QuranTabState();
+}
+
+class _QuranTabState extends State<QuranTab> {
   List<String> names = [
     "الفاتحه",
     "البقرة",
@@ -118,6 +123,7 @@ class QuranTab extends StatelessWidget {
     "الفلق",
     "الناس"
   ];
+
   List<String> times = [
     "7",
     "286",
@@ -243,46 +249,33 @@ class QuranTab extends StatelessWidget {
             flex: 2,
             child: Image.asset('assets/images/quran_header_image.png')),
         Container(
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).accentColor,
           height: 2,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const [
+          children: [
             Text(
               'عدد الآيات',
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.w500,
-              ),
+              style: Theme.of(context).textTheme.headline4,
             ),
             Text(
               'اسم السورة',
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.w500,
-              ),
+              style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
         Container(
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).accentColor,
           height: 2,
         ),
         Expanded(
           flex: 5,
-          child: ListView.separated(
+          child: ListView.builder(
             itemBuilder: (_, index) {
-              return SuraTitleWidget(names[index], index);
+              return SuraTitleWidget(names[index], times[index], index);
             },
             itemCount: names.length,
-            separatorBuilder: (_, index) {
-              return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 15),
-                color: Theme.of(context).primaryColor,
-                height: 1,
-              );
-            },
           ),
         )
       ],
