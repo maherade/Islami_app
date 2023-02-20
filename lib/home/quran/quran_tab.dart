@@ -256,11 +256,11 @@ class _QuranTabState extends State<QuranTab> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              'عدد الآيات',
+              'اسم السورة',
               style: Theme.of(context).textTheme.headline4,
             ),
             Text(
-              'اسم السورة',
+              'عدد الآيات',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],

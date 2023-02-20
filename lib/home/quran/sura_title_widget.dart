@@ -26,6 +26,12 @@ class SuraTitleWidget extends StatelessWidget {
             children: [
               TableRow(
                 children: [
+                  Center(
+                    child: Text(
+                      title,
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                  ),
                   Container(
                     margin: const EdgeInsets.only(top: 7),
                     child: Center(
@@ -33,12 +39,6 @@ class SuraTitleWidget extends StatelessWidget {
                         times,
                         style: Theme.of(context).textTheme.headline4,
                       ),
-                    ),
-                  ),
-                  Center(
-                    child: Text(
-                      title,
-                      style: Theme.of(context).textTheme.headline4,
                     ),
                   ),
                 ],

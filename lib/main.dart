@@ -7,6 +7,7 @@ import 'package:islami_app/my_theme.dart';
 import 'package:islami_app/providers/settings_provider.dart';
 import 'package:islami_app/sura_details/sura_details_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'hadeth_details/hadeth_details.dart';
 
@@ -16,9 +17,12 @@ void main() {
 }
 
 class MyApplication extends StatelessWidget {
+  late SettingsProvider settingsProvider;
+
   @override
   Widget build(BuildContext context) {
-    var settingsProvider = Provider.of<SettingsProvider>(context);
+    settingsProvider = Provider.of<SettingsProvider>(context);
+    getValueFromShared();
 
     return MaterialApp(
       localizationsDelegates: [
@@ -44,5 +48,16 @@ class MyApplication extends StatelessWidget {
       },
       initialRoute: SplashScreen.routeName,
     );
+  }
+
+  getValueFromShared() async {
+    final pref = await SharedPreferences.getInstance();
+    settingsProvider.changeLanguage(pref.getString("lang") ?? 'en');
+
+    if (pref.getString("theme") == "light") {
+      settingsProvider.changeTheme(ThemeMode.light);
+    } else if (pref.getString("theme") == "dark") {
+      settingsProvider.changeTheme(ThemeMode.dark);
+    }
   }
 }
